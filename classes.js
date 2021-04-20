@@ -151,19 +151,19 @@ class Machine {
   }
   makeWidgets(num){
     this.widgets_made_count += num
-    if(this.widgets_made_count === 50 ){
-       return this.wear_and_tear_count += 1
-    }
+    this.wear_and_tear_count += Math.floor(num / 50)          //Normally you would want to use widgets_made_count instead of num here.
   }
   fixMachine(){
-    return this.needs_reboot = true;
+     this.needs_reboot = true;
   }
   reboot(){
-    return function(){
+    return () => {                                           //The way scope works, arrow functions work better here than the regular anonymous function
         this.wear_and_tear_count -= 10;
         this.needs_reboot = false;
     }
   }
 }
+
+//Math.round rounds to the closest integer, Math.floor goes to the lowest, and Math.ceil goes to the higher.
 
 
